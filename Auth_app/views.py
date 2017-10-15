@@ -27,9 +27,11 @@ def home(request):
 		# user_list = User.objects.all()
 		# User.objects.all().delete()
 		# import pdb;pdb.set_trace()
-		res = User.objects.get_or_create(mac = request.GET['mac'])
-		User.objects.filter(mac = request.GET['mac']).update(gw_id = request.GET['gw_id']\
-			,gw_address=request.GET['gw_address'],gw_port=request.GET['gw_port'],url=request.GET['url'])
+
+		# res = User.objects.get_or_create(mac = request.GET['mac'])
+		# User.objects.filter(mac = request.GET['mac']).update(gw_id = request.GET['gw_id']\
+		# 	,gw_address=request.GET['gw_address'],gw_port=request.GET['gw_port'],url=request.GET['url'])
+		
 		# res[0].gw_id = request.GET['gw_id']
 		# res[0].gw_address=request.GET['gw_address']
 		# res[0].gw_port=request.GET['gw_port']
@@ -54,12 +56,18 @@ def login(request):
 		print('received post request!!!!!!!!!!!!!',time.ctime(time.time()))
 		t2 = time.time()
 		# user = User.objects.get_or_create(mac = request.POST.get('mac'))
-		user = User.objects.get(mac = request.POST.get('mac'))
-		print('get user!!!!!!!!!!!!!',time.ctime(time.time()))
+		
+		# user = user_list[0]
+		
 		
 		imgs = request.FILES.getlist("uploadfile",None) 
+
 		t0 = time.time()
 		print('get images!!!!!!!!!!!!',time.ctime(time.time()))
+
+		user = User.objects.get(mac = request.POST.get('mac'))
+
+		print('get user!!!!!!!!!!!!!',time.ctime(time.time()))
 		if not imgs:
 			return HttpResponse("no file for upload")
 		else:
